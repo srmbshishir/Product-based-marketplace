@@ -19,4 +19,13 @@ Route::get('/', function () {
 
 Route::get('/login', 'LoginController@index');
 Route::post('/login', 'LoginController@verify');
-Route::get('/home', 'LoginController@home');
+
+Route::group(['middleware'=>['sess']], function(){
+
+    Route::get('/admin/index', 'LoginController@admin');
+    Route::get('/buyer/index', 'LoginController@buyer');
+    Route::get('/seller/index', 'LoginController@seller');
+
+});
+
+Route::get('/logout', 'LogoutController@index')->name('logout');
