@@ -27,6 +27,8 @@ class LoginController extends Controller
                 $user = Person::find($req->email);
                 $req->session()->put('name', $user['name']);
                 $req->session()->put('type', $user['type']);
+                $req->session()->put('id', $user['id']);
+
                 //$req->session()->put('name', $result->name);
                 //$req->session()->put('type', $result->type);
                 

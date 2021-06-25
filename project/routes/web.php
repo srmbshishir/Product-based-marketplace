@@ -26,6 +26,17 @@ Route::group(['middleware'=>['sess']], function(){
     Route::get('/buyer/index', 'LoginController@buyer');
     Route::get('/seller/index', 'LoginController@seller');
 
+    Route::group(['middleware'=>['seller']], function(){
+        Route::get('/seller/addProduct', 'ProductController@add')->name('add');
+        Route::post('/seller/addProduct', 'ProductController@insert')->name('insert');
+        Route::get('/seller/showProduct', 'ProductController@show')->name('show');
+        
+        
+        Route::get('/product/{name}/edit', 'ProductController@edit');
+        Route::post('/product/{name}/edit', 'ProductController@update');
+        Route::get('/product/{name}/delete', 'ProductController@delete');
+        
+    });
 });
 
 Route::get('/logout', 'LogoutController@index')->name('logout');
