@@ -67,5 +67,11 @@
             </tr>
         @endforeach
  	</table>
+     <style>
+         .w-5{
+             display: none;
+         }
+     </style>
+     {{ $userlist->links() }}
     </body>
 </html>
