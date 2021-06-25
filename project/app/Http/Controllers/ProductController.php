@@ -111,4 +111,11 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->route('show');
     }
+    public function search(Request $req)
+    {
+        $products= DB::select("SELECT * FROM `product` WHERE id like '".$req->search."%' or category like '".$req->search."%'");
+        //SELECT * FROM `product` WHERE id like 'elec%' or category like 'elec%'
+        //dd($req->all());
+        return view('Seller.show')->with('userlist', $products);
+    }
 }

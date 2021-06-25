@@ -30,7 +30,9 @@ Route::group(['middleware'=>['sess']], function(){
         Route::get('/seller/addProduct', 'ProductController@add')->name('add');
         Route::post('/seller/addProduct', 'ProductController@insert')->name('insert');
         Route::get('/seller/showProduct', 'ProductController@show')->name('show');
-        
+
+        Route::post('/seller/showProduct/search', 'ProductController@search');
+        Route::post('/seller/showProduct/all', 'ProductController@show');
         
         Route::get('/product/{name}/edit', 'ProductController@edit');
         Route::post('/product/{name}/edit', 'ProductController@update');
