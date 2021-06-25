@@ -10,6 +10,10 @@
     <h1>Hello</h1>
     {{session('name')}}
     {{session('type')}}
+    {{session('id')}}
+
+    <a href="{{route('add')}}"><button>Add Product</button></a>
+    <a href="{{route('show')}}"><button>Show Product</button></a>
 
     <a href="{{route('logout')}}"><button>Log out</button></a>
 </body>
