@@ -63,11 +63,35 @@ class ProductController extends Controller
         return redirect()->route('show');
     }
 
-    public function show(){
-        //$products = Product::where('userid', session('id'));
-        $products= DB::select("SELECT * FROM `product` WHERE userid='".session('id')."'");
+    public function show(Request $req){
+
+        //$products= DB::table('product')
+          //          ->where('userid' ,'like', '%' . session('id') . '%');
+        //select("SELECT * FROM `product` WHERE userid='".session('id')."'");
+
+        //$products->paginate(3);
+        //return view('Seller.show')->with('userlist', $products);
+
+        $product =new Product();
+        $products = $product->where('userid',session('id'))->paginate(3);
+        //return view('product.existing')->with('list',$list);
         return view('Seller.show')->with('userlist', $products);
-       // return view('Product.userlist');
+      
+        //$products= DB::select("SELECT * FROM `product` WHERE userid='".session('id')."'");
+        
+       /*
+        $data = DB::table('holes');
+       $products->paginate(3);
+       return view('Product.userlist');
+        ...
+        and then just filter and return it in the if/else statement call
+       return $data->where('city' ,'like', '%' . $city . '%');
+        ...
+        $products = Product::where('userid', session('id'));
+        $data->where('city' ,'like', '%' . $city . '%');
+        or append to the $data
+        $data = $data->where('city' ,'like', '%' . $city . '%');
+  */
     }
 
     public function edit($name)
