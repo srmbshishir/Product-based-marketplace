@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,12 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/login', 'LoginController@index');
 Route::post('/login', 'LoginController@verify');
+Route::get('/register', [UserController::class,'index']);
+        Route::post('/register', [UserController::class,'insert']);
 
 Route::group(['middleware'=>['sess']], function(){
 
@@ -39,6 +39,7 @@ Route::group(['middleware'=>['sess']], function(){
         Route::get('/product/{name}/delete', 'ProductController@delete');
         
     });
+    Route::group(['middleware'=>['buyer']], function(){});
 });
 
 Route::get('/logout', 'LogoutController@index')->name('logout');
