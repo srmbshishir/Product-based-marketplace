@@ -16,7 +16,7 @@ class BuyerCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        if($request->session()->has('type') == 'Buyer'){
+        if($request->session()->has('type') == 'buyer'){
             return $next($request);
         }else{
             return redirect()->route('/Buyer/index');

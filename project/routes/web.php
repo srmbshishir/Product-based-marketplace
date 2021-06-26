@@ -15,6 +15,10 @@ use App\Http\Controllers\UserController;
 |
 */
 
+Route::get('/', function(){
+    return view('welcome');
+});
+
 Route::get('/login', 'LoginController@index');
 Route::post('/login', 'LoginController@verify');
 Route::get('/register', [UserController::class,'index']);
