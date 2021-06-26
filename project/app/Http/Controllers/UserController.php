@@ -17,15 +17,15 @@ class UserController extends Controller
         if($count){
             $id = intval(substr($count->id,2,4))+1;
             $user->type = $req->type;
-            if($user->type == 'Admin')
+            if($user->type == 'admin')
             {
                 $id = "A-".strval($id);
             }
-            elseif($user->type == 'Seller')
+            elseif($user->type == 'seller')
             {
                 $id = "S-".strval($id);
             }
-            elseif($user->type == 'Buyer')
+            elseif($user->type == 'buyer')
             {
                 $id = "B-".strval($id);
             }

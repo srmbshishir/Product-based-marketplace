@@ -28,9 +28,9 @@
 				<tr>
 					<td>User Type: 
 					<select name="type">
-						<option value="Admin">Admin</option>
-						<option value="Seller">Seller</option>
-						<option value="Buyer">Buyer</option>
+						<option value="admin">Admin</option>
+						<option value="seller">Seller</option>
+						<option value="buyer">Buyer</option>
 					</select>
 					</td>
 				</tr>
