@@ -21,8 +21,9 @@ Route::get('/', function(){
 
 Route::get('/login', 'LoginController@index');
 Route::post('/login', 'LoginController@verify');
+
 Route::get('/register', [UserController::class,'index']);
-        Route::post('/register', [UserController::class,'insert']);
+Route::post('/register', [UserController::class,'insert']);
 
 Route::group(['middleware'=>['sess']], function(){
 
@@ -37,11 +38,16 @@ Route::group(['middleware'=>['sess']], function(){
 
         Route::post('/seller/showProduct/search', 'ProductController@search');
         Route::post('/seller/showProduct/all', 'ProductController@show');
+
+        Route::post('/seller/showOrder/search', 'OrderController@search');
+        Route::post('/seller/showOrder/all', 'OrderController@showOrder');
+        Route::post('/seller/showOrder/{id}', 'OrderController@track');
         
         Route::get('/product/{name}/edit', 'ProductController@edit');
         Route::post('/product/{name}/edit', 'ProductController@update');
         Route::get('/product/{name}/delete', 'ProductController@delete');
         
+        Route::get('/seller/showOrderList', 'OrderController@showOrder')->name('showOrder');
     });
     Route::group(['middleware'=>['buyer']], function(){});
 });
