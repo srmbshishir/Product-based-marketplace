@@ -11,12 +11,12 @@
 <body>
     <h3> Order List of {{session('id')}}</h3>
 
-    <form method="get" enctype="multipart/form-data" action="/seller/showOrder/search">
+    <form method="post" enctype="multipart/form-data" action="/seller/showOrder/search">
         @csrf
         <input type="text" placeholder="Type order id/date" name="search">
         <input type="submit" name="khujo" value="Search">
     </form>
-    <form method="get" enctype="multipart/form-data" action="/seller/showOrder/all">
+    <form method="post" enctype="multipart/form-data" action="/seller/showOrder/all">
         @csrf
         <input type="submit" name="khujo" value="Show All">
     </form>
@@ -61,11 +61,5 @@
             </tr>
         @endforeach
  	</table>
-     <style>
-        .w-5{
-            display: none;
-        }
-    </style>
-    {{ $orderlist->links() }}
     </body>
 </html>

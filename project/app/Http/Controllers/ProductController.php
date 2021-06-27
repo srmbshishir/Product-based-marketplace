@@ -137,7 +137,8 @@ class ProductController extends Controller
     }
     public function search(Request $req)
     {
-        $products= DB::select("SELECT * FROM `product` WHERE id like '".$req->search."%' or category like '".$req->search."%'");
+        $product =new Product();
+        $products = $product->where('id','like','%'.$req->search.'%')->where('userid',session('id'))->orwhere('category','like','%'.$req->search.'%')->where('userid',session('id'))->paginate(3);
         //SELECT * FROM `product` WHERE id like 'elec%' or category like 'elec%'
         //dd($req->all());
         return view('Seller.show')->with('userlist', $products);
