@@ -37,6 +37,12 @@ Route::group(['middleware'=>['sess']], function(){
         Route::get('/seller/showProduct', 'ProductController@show')->name('show');
         Route::get('/seller/dashboard/{id}', 'OrderController@dashboard')->name('dashboard');
 
+        Route::get('/seller/profile/{id}', 'UserController@profile')->name('profile');
+        Route::post('/seller/profile/{id}', 'UserController@profileupdate');
+        Route::post('/seller/pic/{id}', 'UserController@profileimage');
+
+
+
         Route::get('/seller/showProduct/search', 'ProductController@search');
         Route::get('/seller/showProduct/all', 'ProductController@show');
 

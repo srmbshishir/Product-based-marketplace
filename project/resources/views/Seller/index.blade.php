@@ -18,6 +18,7 @@
     <a href="{{route('show')}}"><button class="btn btn-warning">Show Product</button></a>
     <a href="{{route('showOrder')}}"><button class="btn btn-primary">Show Orders</button></a>
     <a href="/seller/dashboard/{{session('id')}}/"><button class="btn btn-dark">Dashboard</button></a>
+    <a href="/seller/profile/{{session('id')}}/"><button class="btn btn-info">My Profile</button></a>
 
 
     <a href="{{route('logout')}}"><button class="btn btn-danger">Log out</button></a>
