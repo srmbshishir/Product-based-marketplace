@@ -51,9 +51,9 @@
                         <label for="track">Update Tracking:</label>
                 
                         <select name="track" id="track">
-                            <option value="order taken">Order Taken</option>
-                            <option value="Delivery man">Delivery man taken</option>
-                            <option value="Delivered">Delivered</option>
+                            <option value="order taken" {{$order->track=="order taken" ? 'selected' : ''}}>Order Taken</option>
+                            <option value="Delivery man" {{$order->track=="Delivery man" ? 'selected' : ''}}>Delivery man taken</option>
+                            <option value="Delivered" {{$order->track=="Delivered" ? 'selected' : ''}}>Delivered</option>
                         </select>
                         <input type="submit" name="khujo" value="Update Tracking">
                     </form>
