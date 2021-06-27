@@ -13,6 +13,7 @@
   --}}
   <h3> EDIT User</h3>
 
+  <a href='/seller/index'> Back </a> 
   <form method="post" enctype="multipart/form-data">
       @csrf
     <table>

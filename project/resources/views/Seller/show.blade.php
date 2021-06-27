@@ -11,12 +11,12 @@
 <body>
     <h3> Product List of {{session('id')}}</h3>
 
-    <form method="post" enctype="multipart/form-data" action="/seller/showProduct/search">
+    <form method="get" enctype="multipart/form-data" action="/seller/showProduct/search">
         @csrf
         <input type="text" placeholder="Type product id/type" name="search">
         <input type="submit" name="khujo" value="Search">
     </form>
-    <form method="post" enctype="multipart/form-data" action="/seller/showProduct/all">
+    <form method="get" enctype="multipart/form-data" action="/seller/showProduct/all">
         @csrf
         <input type="submit" name="khujo" value="Show All">
     </form>

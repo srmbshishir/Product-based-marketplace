@@ -40,5 +40,7 @@
                 @endforeach </p>
         </div>
       </div>
+      <h3>Download sales report</h3>
+      <a href="/seller/export" class="btn btn-success">Export</a>
 </body>
 </html>
