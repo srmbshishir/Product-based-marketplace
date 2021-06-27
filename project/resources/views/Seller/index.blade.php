@@ -15,6 +15,7 @@
 
     <a href="{{route('add')}}"><button>Add Product</button></a>
     <a href="{{route('show')}}"><button>Show Product</button></a>
+    <a href="{{route('showOrder')}}"><button>Show Orders</button></a>
 
     <a href="{{route('logout')}}"><button>Log out</button></a>
 </body>
