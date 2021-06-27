@@ -8,15 +8,18 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Hello</h1>
-    {{session('name')}}
-    {{session('type')}}
-    {{session('id')}}
+    <h1>Welcome</h1>
+    <h3>Name : {{session('name')}}</h3>
+    <h3>User type : {{session('type')}}</h3>
+    <h3>User id : {{session('id')}}</h3>
+    
 
-    <a href="{{route('add')}}"><button>Add Product</button></a>
-    <a href="{{route('show')}}"><button>Show Product</button></a>
-    <a href="{{route('showOrder')}}"><button>Show Orders</button></a>
+    <a href="{{route('add')}}"><button class="btn btn-success">Add Product</button></a>
+    <a href="{{route('show')}}"><button class="btn btn-warning">Show Product</button></a>
+    <a href="{{route('showOrder')}}"><button class="btn btn-primary">Show Orders</button></a>
+    <a href="/seller/dashboard/{{session('id')}}/"><button class="btn btn-dark">Dashboard</button></a>
 
-    <a href="{{route('logout')}}"><button>Log out</button></a>
+
+    <a href="{{route('logout')}}"><button class="btn btn-danger">Log out</button></a>
 </body>
 </html>
