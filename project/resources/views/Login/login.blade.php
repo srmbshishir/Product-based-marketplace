@@ -25,6 +25,11 @@
                 <td><input type="submit" name="submit" class="form-control" value="Submit"></td>
                 <td></td>
             </tr>
+            <tr>
+                <td></td>
+                <td><a href="/register">Register Here.</a></td>
+                <td></td>
+            </tr>
         </table>
         {{session('msg')}}
         @foreach ($errors->all() as $error)

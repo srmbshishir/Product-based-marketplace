@@ -24,11 +24,13 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' =>'required',
-            'email'=>'required|email|max:50',
+            'name'=> 'required|max:50',
+            'email'=>'required|email|max:50|bail',
             'address'=>'required|max:255',
-            'phone' =>'required|min:11|numeric',
-            'password'=>'required|min:8',
+            'phone'=>'required',
+            'type'=>'required',
+            'image'=>'required',
+            'password'=>'required|alpha_num|min:10|max:20|bail',
             'rpass'=>'required|same:password',
         ];
     }
@@ -37,11 +39,12 @@ class UserRequest extends FormRequest
             'name.required' => 'cannot be empty.',
             'email.required' => 'provide valid email.',
             'address.required'=> 'provide your address.',
-            'phone.required' => 'provide your contact number',
-        //     'utype.required'=> 'enter a user type',
-        //     'img.required'=> 'please upload a picture',
-            'pass.required'=> 'minimum 8 characters for password.',
+            'phone.required' => 'provide your contact number.',
+            'type.required'=> 'enter a user type.',
+            'image.required'=> 'please upload a picture',
+            'password.required'=> 'minimum 10 characters for password.',
             'rpass.required'=>'confirm password',
+            'rpass.same'=>'password must match.'
          ];
     }
 }
