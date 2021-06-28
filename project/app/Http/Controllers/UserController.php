@@ -11,25 +11,39 @@ class UserController extends Controller
     public function index(){
         return view('register.index');
     }
-    public function insert(userRequest $req){
-        $user = new User;
-        $count = User::orderBy('id',"desc")->first();
-        if($count){
-            $id = intval(substr($count->id,2,4))+1;
-            $user->type = $req->type;
-            if($user->type == 'admin')
-            {
-                $id = "A-".strval($id);
-            }
-            elseif($user->type == 'seller')
-            {
-                $id = "S-".strval($id);
-            }
-            elseif($user->type == 'buyer')
-            {
-                $id = "B-".strval($id);
-            }
+    public function insert(UserRequest $req){
+
+        if($req->type == 'admin')
+        {
+                $user = new User;
+                $count = $user->where('type','admin')->orderBy('id',"desc")->first();
+                if($count){
+                    $id = intval(substr($count->id,2,4))+1;
+                    $user->type = $req->type;
+                    $id = "A-".strval($id);
+                }
         }
+        elseif($req->type == 'seller')
+        {
+                $user = new User;
+                $count = $user->where('type','seller')->orderBy('id',"desc")->first();
+                if($count){
+                    $id = intval(substr($count->id,2,4))+1;
+                    $user->type = $req->type;
+                    $id = "S-".strval($id);
+                }
+        }
+            elseif($req->type == 'buyer')
+            {
+                $user = new User;
+                $count = $user->where('type','buyer')->orderBy('id',"desc")->first();
+                if($count){
+                    $id = intval(substr($count->id,2,4))+1;
+                    $user->type = $req->type;
+                    $id = "B-".strval($id);
+                }
+            }
+        
         $user->id = $id;
         $user->name = $req->name;
         $user->email = $req->email;
@@ -43,11 +57,16 @@ class UserController extends Controller
             if($file->move('upload', $file->getClientOriginalName())){
                 return redirect('/login');
                 echo "successfully created account, login with email and password.";
-            }else echo "error";
-        }else{
+            }
+            else{
+                echo "error";
+            }
+        }
+        else{
             echo "file not found.";
         }    
     }
+
 
     public function profile($id){
        // return view('Seller.profile');

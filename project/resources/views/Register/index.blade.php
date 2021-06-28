@@ -41,9 +41,9 @@
 				<tr>
 					<td><input type="password" name="password" id="pass" placeholder="Password" /></td>
 				</tr>
-				<!--<tr>
+				<tr>
 					<td><input type="password" name="rpass" id="rpass" placeholder="Re-type Password" /></td>
-				</tr>-->
+				</tr>
 				<tr>
 					<td><input type="submit" name="Register" value="submit"/></td>
 				</tr>
