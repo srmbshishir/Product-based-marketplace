@@ -58,7 +58,4 @@ class LoginController extends Controller
     public function seller(){
         return view('Seller.index');
     }
-
-
-
 }
