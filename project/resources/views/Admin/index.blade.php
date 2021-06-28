@@ -16,6 +16,8 @@
     <a href="{{route('adduser')}}"><button class="btn btn-success">Add user</button></a>
     <a href="{{route('approve')}}"><button class="btn btn-warning">Approve Products</button></a>
     <a href="{{route('showuser')}}"><button class="btn btn-primary">Show Users</button></a>
+    <a href="/admin/profile/{{session('id')}}/"><button class="btn btn-info">My Profile</button></a>
+    <a href="/admin/dashboard/"><button class="btn btn-dark">Dashboard</button></a>
     <a href="{{route('logout')}}"><button class="btn btn-danger">Log out</button></a>
 </body>
 </html>

@@ -5,6 +5,7 @@ use App\Models\User;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\ProRequest;
 
 class UserController extends Controller
 {
@@ -200,6 +201,46 @@ class UserController extends Controller
         else{
             echo "file not found.";
         }    
+    }
+    //ADMIN PROFILE WORK
+    public function profileadmin($id){
+        // return view('Seller.profile');
+         $user = User::find($id);
+         return view('Admin.profile')->with('user', $user);
+    }
+     public function adminupdate(ProRequest $req, $id)
+    {
+        $user= User::find($id);
+        $user->name = $req->name;
+        $user->address = $req->address;
+        $user->phone = $req->phone;
+        $user->email = $req->email;
+        $user->password = $req->password;
+
+        $user->save();
+        return view('Admin.profile')->with('user',$user);
+    }
+    public function adminimage(Request $req,$id){
+        $user= User::find($id);
+        if($req->hasFile('image')){
+            $file = $req->file('image');
+            // echo "file name: ".$file->getClientOriginalName()."<br>";
+            // echo "file extension: ".$file->getClientOriginalExtension()."<br>";
+            // echo "file Mime Type: ".$file->getType()."<br>";
+            // echo "file Size: ".$file->getSize();
+            $user->image = $file->getClientOriginalName();
+            $user->save();
+
+            if($file->move('upload', $file->getClientOriginalName())){
+                echo "success";
+            }else{
+                echo "error..";
+            }
+
+        }else{
+            echo "file not found!";
+        }
+        return view('Admin.profile')->with('user',$user);
     }
 
 }
