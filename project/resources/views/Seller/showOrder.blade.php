@@ -66,6 +66,6 @@
             display: none;
         }
     </style>
-    {{ $orderlist->links() }}
+    {{ $orderlist->appends(Request::except('page'))->links() }}
     </body>
 </html>
