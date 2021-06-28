@@ -59,10 +59,21 @@ Route::group(['middleware'=>['sess']], function(){
 
     Route::group(['middleware'=>['admin']], function(){
         Route::get('/admin/index', 'LoginController@admin');
+
         Route::get('/admin/ApproveProduct', 'ProductController@approve')->name('approve');
         Route::post('/admin/status/{id}', 'ProductController@status');
         Route::get('/admin/showProduct/search', 'ProductController@adminsearch');
         Route::get('/admin/showProduct/all', 'ProductController@approve');
+
+        Route::get('/admin/addUser', 'UserController@addUser')->name('adduser');
+        Route::post('/admin/addUser', 'UserController@insertuser');
+        Route::get('/admin/showUser', 'UserController@showUser')->name('showuser');
+        Route::get('/admin/showuser/search', 'UserController@usersearch');
+        Route::get('/admin/showuser/all', 'UserController@showUser');
+
+        Route::get('/admin/{id}/edit', 'UserController@edit');
+        Route::post('/admin/{id}/edit', 'UserController@update');
+        Route::get('/admin/{id}/delete', 'UserController@delete');
     });
 });
 
