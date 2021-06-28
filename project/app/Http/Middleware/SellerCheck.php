@@ -16,10 +16,11 @@ class SellerCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        if($request->session()->has('type') == 'seller'){
+        if(session('type') == 'seller'){
             return $next($request);
         }else{
-            return redirect()->route('/seller/index');
+            $request->session()->flash('msg', 'Invalid request');
+            return redirect('/login');
         }
     }
 }

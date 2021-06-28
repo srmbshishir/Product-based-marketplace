@@ -9,19 +9,19 @@
     <title>Document</title>
 </head>
 <body>
-    <h3> Product List of {{session('id')}}</h3>
+    <h3> Admin id: {{session('id')}}</h3>
 
-    <form method="get" enctype="multipart/form-data" action="/seller/showProduct/search">
-        @csrf
+    <form method="get" enctype="multipart/form-data" action="/admin/showProduct/search">
+        
         <input type="text" placeholder="Type product id/type" name="search">
-        <input type="submit" name="khujo" value="Search">
+        <input type="submit" name="" value="Search">
     </form>
-    <form method="get" enctype="multipart/form-data" action="/seller/showProduct/all">
+    <form method="get" enctype="multipart/form-data" action="/admin/showProduct/all">
         @csrf
         <input type="submit" name="khujo" value="Show All">
     </form>
     
-    <a href='/seller/index'> Back </a> 
+    <a href='/admin/index'> Back </a> 
 	<table class="table table-striped">
 		<tr>
             <td>Product Id</td>
@@ -34,7 +34,7 @@
             <td>description</td>
             <td>image</td>
             <td>status</td>
-            <td>Action</td>
+            <td>update status</td>
 		</tr>
         @foreach ($userlist as $product)
             <tr>
@@ -46,25 +46,20 @@
                 <td>{{$product->discount}}</td>
                 <td>{{$product->quantity}}</td>
                 <td>{{$product->description}}</td>
-                <td><img src="/upload/{{$product->image}}" alt="" width="200px" height="150px"></td>
+                <td><img src="/upload/{{$product->image}}" alt="" width="100px" height="80px"></td>
                 <td>{{$product->status}}</td>
-
                 <td>
-                    <a href="/product/{{$product->id}}/edit/"> Edit</a>
-                    <a href="/product/{{$product->id}}/delete/" onclick="return confirm('Are you sure?')">Delete</a>
+                    <form method="post" enctype="multipart/form-data" action="/admin/status/{{$product->id}}">
+                        @csrf
+                        <label for="status">Update Status:</label>
                 
-                    {{--
-                        <a href="/product/{{$product['name']}}/edit/"> Edit</a>
-                    <a href="/product/{{$product['name']}}/delete/">Delete</a>
-                        <form action="/product/{{$product['name']}}/" method="DELETE">
-                        <input type="submit" value="Delete" />
-                        </form>
-                        <input type="hidden" name="_method" value="delete" />
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <a href="/user/details/{{$user['id']}}"> Details</a> |
-                    <a href="/user/edit/{{$user['id']}}"> Edit</a> |
-                    <a href="/user/delete/{{$user['id']}}"> Delete</a> 
-                --}}
+                        <select name="status" id="status">
+                            <option value="pending" {{$product->status=="pending" ? 'selected' : ''}}>Pending</option>
+                            <option value="accepted" {{$product->status=="accepted" ? 'selected' : ''}}>Accepted</option>
+                            <option value="cancelled" {{$product->status=="cancelled" ? 'selected' : ''}}>Cancelled</option>
+                        </select>
+                        <input type="submit" name="khujo" value="Update Status">
+                    </form>
                 </td>
             </tr>
         @endforeach

@@ -26,12 +26,8 @@ Route::get('/register', [UserController::class,'index']);
 Route::post('/register', [UserController::class,'insert']);
 
 Route::group(['middleware'=>['sess']], function(){
-
-    Route::get('/admin/index', 'LoginController@admin');
-    Route::get('/buyer/index', 'LoginController@buyer');
-    Route::get('/seller/index', 'LoginController@seller');
-
     Route::group(['middleware'=>['seller']], function(){
+        Route::get('/seller/index', 'LoginController@seller');
         Route::get('/seller/addProduct', 'ProductController@add')->name('add');
         Route::post('/seller/addProduct', 'ProductController@insert')->name('insert');
         Route::get('/seller/showProduct', 'ProductController@show')->name('show');
@@ -57,7 +53,17 @@ Route::group(['middleware'=>['sess']], function(){
         
         Route::get('/seller/showOrderList', 'OrderController@showOrder')->name('showOrder');
     });
-    Route::group(['middleware'=>['buyer']], function(){});
+    Route::group(['middleware'=>['buyer']], function(){
+        Route::get('/buyer/index', 'LoginController@buyer');
+    });
+
+    Route::group(['middleware'=>['admin']], function(){
+        Route::get('/admin/index', 'LoginController@admin');
+        Route::get('/admin/ApproveProduct', 'ProductController@approve')->name('approve');
+        Route::post('/admin/status/{id}', 'ProductController@status');
+        Route::get('/admin/showProduct/search', 'ProductController@adminsearch');
+        Route::get('/admin/showProduct/all', 'ProductController@approve');
+    });
 });
 
 Route::get('/logout', 'LogoutController@index')->name('logout');

@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class BuyerCheck
+class AdminCheck
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class BuyerCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        if(session('type') == 'buyer'){
+        if(session('type') == 'admin'){
             return $next($request);
         }else{
             $request->session()->flash('msg', 'Invalid request');
