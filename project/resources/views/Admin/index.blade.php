@@ -9,11 +9,13 @@
 </head>
 <body>
     <h1>Hello</h1>
-    {{session('name')}}
-    {{session('type')}}
+    <h3>{{session('name')}}</h3>
+    <h3>{{session('type')}}</h3>
 
-    <a href="{{route('logout')}}"><button>Log out</button></a>
-
+    
+    <a href="{{route('adduser')}}"><button class="btn btn-success">Add user</button></a>
     <a href="{{route('approve')}}"><button class="btn btn-warning">Approve Products</button></a>
+    <a href="{{route('showuser')}}"><button class="btn btn-primary">Show Users</button></a>
+    <a href="{{route('logout')}}"><button class="btn btn-danger">Log out</button></a>
 </body>
 </html>
