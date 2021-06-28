@@ -74,6 +74,11 @@ Route::group(['middleware'=>['sess']], function(){
         Route::get('/admin/{id}/edit', 'UserController@edit');
         Route::post('/admin/{id}/edit', 'UserController@update');
         Route::get('/admin/{id}/delete', 'UserController@delete');
+
+        Route::get('/admin/profile/{id}', 'UserController@profileadmin')->name('profile');
+        Route::post('/admin/profile/{id}', 'UserController@adminupdate');
+        Route::post('/admin/pic/{id}', 'UserController@adminimage');
+        Route::get('/admin/dashboard/', 'OrderController@admindashboard');
     });
 });
 

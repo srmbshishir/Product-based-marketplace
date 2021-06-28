@@ -11,7 +11,7 @@
     <h1>welcome {{session('id')}}</h1>
     <h3> EDIT User</h3>
 
-    <a href='/admin/showUser'> Back </a> 
+    <a href='/admin/index'> Back </a> 
     <form method="post" enctype="multipart/form-data">
         @csrf
       <table>
@@ -32,22 +32,25 @@
             <td><input type="text" name="phone" value="{{$user->phone}}"></td>
         </tr>
         <tr>
-            <td><label for="type">User Type:</label></td>
-
-            <td>
-                <select name="type" id="type">
-                    <option value="admin" {{$user->type=="admin" ? 'selected' : ''}}>Admin</option>
-                    <option value="buyer" {{$user->type=="buyer" ? 'selected' : ''}}>Buyer</option>
-                    <option value="seller" {{$user->type=="seller" ? 'selected' : ''}}>Seller</option>
-                </select>
-            </td>
+            <td>Password</td>
+            <td><input type="text" name="password" value="{{$user->password}}"></td>
         </tr>
-
+        <tr>
+            <td>Re type Password</td>
+            <td><input type="text" name="rpass" value=""></td>
+        </tr>
         <tr>
             <td></td>
             <td><input type="submit" name="update" class="btn btn-primary" value="update"></td>
         </tr>
       </table>
+    </form>
+    <form method="post" enctype="multipart/form-data" action="/admin/pic/{{session('id')}}">
+        @csrf 
+        <img src="/upload/{{$user->image}}" width="200px" height="150px">
+        <h5>change profile picture</h5>
+        <input type="file" name="image" class="btn btn-warning">
+        <input type="submit" name="update" class="btn btn-primary" value="change">
     </form>
       @foreach ($errors->all() as $error)
         {{$error}} <br>
