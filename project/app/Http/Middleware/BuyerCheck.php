@@ -16,10 +16,11 @@ class BuyerCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        if($request->session()->has('type') == 'buyer'){
+        if(session('type') == 'buyer'){
             return $next($request);
         }else{
-            return redirect()->route('login');
+           $request->session()->flash('msg', 'Invalid request');
+            return redirect('/login');
         }
     }
 }

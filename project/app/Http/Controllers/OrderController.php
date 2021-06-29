@@ -62,4 +62,22 @@ class OrderController extends Controller
     public function export(){
         return Excel::download(new SaleExport,'innovices.xlsx');
     }
+    public function admindashboard(Request $req){
+        //SELECT sum(price) FROM `orderlist` where track='delivered''
+        $orders= DB::select("SELECT sum(price) FROM `orderlist` WHERE track='delivered'");
+        //SELECT sum(price),sellerid FROM `orderlist` GROUP BY sellerid
+        $sellers=DB::select("SELECT sum(price) as sum,sellerid FROM `orderlist` GROUP BY sellerid");
+
+
+
+       // print_r($sellers[0]->sum);
+         $data = [
+             'total_income'             => $orders,
+             'seller'                   => $sellers,
+
+        ];
+       //  dd($req->all());
+       //  print_r($data['total_income'][0]->sum(price));
+        return view('Admin.dashboard')->with('orderlist', $data);
+    }
 }

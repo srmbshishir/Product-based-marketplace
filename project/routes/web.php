@@ -29,9 +29,6 @@ Route::get('/register', [UserController::class,'index']);
 Route::post('/register', [UserController::class,'insert']);
 
 Route::group(['middleware'=>['sess']], function(){
-
-    Route::get('/admin/index', 'LoginController@admin');
-
     Route::group(['middleware'=>['seller']], function(){
         Route::get('/seller/index', 'LoginController@seller');
         Route::get('/seller/addProduct', 'ProductController@add')->name('add');
@@ -66,6 +63,30 @@ Route::group(['middleware'=>['sess']], function(){
         Route::post('/buyer/edit/{id}','BuyerController@editProfile');
         Route::get('buyer/edit/buyer/cpass/{id}','BuyerController@cpass');
 
+    });
+
+    Route::group(['middleware'=>['admin']], function(){
+        Route::get('/admin/index', 'LoginController@admin');
+
+        Route::get('/admin/ApproveProduct', 'ProductController@approve')->name('approve');
+        Route::post('/admin/status/{id}', 'ProductController@status');
+        Route::get('/admin/showProduct/search', 'ProductController@adminsearch');
+        Route::get('/admin/showProduct/all', 'ProductController@approve');
+
+        Route::get('/admin/addUser', 'UserController@addUser')->name('adduser');
+        Route::post('/admin/addUser', 'UserController@insertuser');
+        Route::get('/admin/showUser', 'UserController@showUser')->name('showuser');
+        Route::get('/admin/showuser/search', 'UserController@usersearch');
+        Route::get('/admin/showuser/all', 'UserController@showUser');
+
+        Route::get('/admin/{id}/edit', 'UserController@edit');
+        Route::post('/admin/{id}/edit', 'UserController@update');
+        Route::get('/admin/{id}/delete', 'UserController@delete');
+
+        Route::get('/admin/profile/{id}', 'UserController@profileadmin')->name('profile');
+        Route::post('/admin/profile/{id}', 'UserController@adminupdate');
+        Route::post('/admin/pic/{id}', 'UserController@adminimage');
+        Route::get('/admin/dashboard/', 'OrderController@admindashboard');
     });
 });
 

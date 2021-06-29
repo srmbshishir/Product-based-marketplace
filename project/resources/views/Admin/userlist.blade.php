@@ -9,49 +9,42 @@
     <title>Document</title>
 </head>
 <body>
-    <h3> Product List of {{session('id')}}</h3>
-
-    <form method="get" enctype="multipart/form-data" action="/seller/showProduct/search">
-        @csrf
-        <input type="text" placeholder="Type product id/type" name="search">
-        <input type="submit" name="khujo" value="Search">
+    <h3> User List</h3>
+    <form method="get" enctype="multipart/form-data" action="/admin/showuser/search">
+        <input type="text" placeholder="Type user id/type" name="search">
+        <input type="submit" name="" value="Search">
     </form>
-    <form method="get" enctype="multipart/form-data" action="/seller/showProduct/all">
+    <form method="get" enctype="multipart/form-data" action="/admin/showuser/all">
         @csrf
         <input type="submit" name="khujo" value="Show All">
     </form>
+
     
-    <a href='/seller/index'> Back </a> 
+    <a href='/admin/index'> Back </a> 
 	<table class="table table-striped">
 		<tr>
-            <td>Product Id</td>
-            <td>Product Name</td>
-			<td>Price</td>
-			<td>Condition</td>
-            <td>Category</td>
-            <td>Discount</td>
-            <td>Quantity</td>
-            <td>description</td>
-            <td>image</td>
-            <td>status</td>
+            <td>User Id</td>
+            <td>Name</td>
+			<td>Email</td>
+			<td>User Type</td>
+            <td>Address</td>
+            <td>Phone</td>
+            <td>Image</td>
             <td>Action</td>
 		</tr>
-        @foreach ($userlist as $product)
+        @foreach ($userlist as $user)
             <tr>
-                <td>{{$product->id}}</td>
-                <td>{{$product->name}}</td>
-                <td>{{$product->price}}</td>
-                <td>{{$product->p_condition}}</td>
-                <td>{{$product->category}}</td>
-                <td>{{$product->discount}}</td>
-                <td>{{$product->quantity}}</td>
-                <td>{{$product->description}}</td>
-                <td><img src="/upload/{{$product->image}}" alt="" width="200px" height="150px"></td>
-                <td>{{$product->status}}</td>
+                <td>{{$user->id}}</td>
+                <td>{{$user->name}}</td>
+                <td>{{$user->email}}</td>
+                <td>{{$user->type}}</td>
+                <td>{{$user->address}}</td>
+                <td>{{$user->phone}}</td>
+                <td><img src="/upload/{{$user->image}}" alt="" width="100px" height="80px"></td>
 
                 <td>
-                    <a href="/product/{{$product->id}}/edit/"> Edit</a>
-                    <a href="/product/{{$product->id}}/delete/" onclick="return confirm('Are you sure?')">Delete</a>
+                    <a href="/admin/{{$user->id}}/edit/"> Edit</a>
+                    <a href="/admin/{{$user->id}}/delete/" onclick="return confirm('Are you sure?')">Delete</a>
                 
                     {{--
                         <a href="/product/{{$product['name']}}/edit/"> Edit</a>

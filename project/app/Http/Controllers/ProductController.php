@@ -38,6 +38,7 @@ class ProductController extends Controller
         $product->quantity          = $req->quantity;
         $product->discount          = $req->discount;
         $product->description       = $req->description;
+        $product->status            = 'pending';         
 
         
 
@@ -143,5 +144,30 @@ class ProductController extends Controller
         //SELECT * FROM `product` WHERE id like 'elec%' or category like 'elec%'
         //dd($req->all());
         return view('Seller.show')->with('userlist', $products);
+    }
+    public function approve(){
+        $product =new Product();
+        $products = $product->orderBy('id','desc')->paginate(5);
+        //return view('product.existing')->with('list',$list);
+        return view('Admin.approve')->with('userlist', $products);
+    }
+    public function status(Request $req, $id)
+    {
+        $product= Product::find($id);
+        //print_r($order);
+        $product->status = $req->status;
+        //print_r($order->track);
+
+        $product->save();
+        //dd($req->all());
+        return redirect('/admin/ApproveProduct');
+    }
+    public function adminsearch(Request $req)
+    {
+        $product =new Product();
+        $products = $product->where('id','like','%'.$req->search.'%')->orwhere('category','like','%'.$req->search.'%')->paginate(3);
+        //SELECT * FROM `product` WHERE id like 'elec%' or category like 'elec%'
+        //dd($req->all());
+        return view('Admin.approve')->with('userlist', $products);
     }
 }
