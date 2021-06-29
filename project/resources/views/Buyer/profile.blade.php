@@ -10,32 +10,49 @@
 </head>
 <body>
     <h1>personal profile of {{ session('id') }}</h1>
-    <table>
-        <tr>
-            <td>Name</td>
-            <td>{{ session('name') }}</td>
+    <a href="/buyer/index">Go Back</a>
+    <form method="post" enctype="multipart/form-data">
+        @csrf
+      <table>
+          <tr>
+              <td>User Name</td>
+              <td><input type="text" name="name" value="{{$user->name}}"></td>
+          </tr>
+          <tr>
+            <td>User Email</td>
+            <td><input type="text" name="email" value="{{$user->email}}"></td>
         </tr>
         <tr>
-          <td>Email</td>
-          <td>{{ session('email') }}</td>
-      </tr>
-      <tr>
-          <td>Address</td>
-          <td>{{ session('address') }}</td>
-      </tr>
-      <tr>
-          <td>Mobile</td>
-          <td>{{ session('phone') }}</td>
-      </tr>
-      <tr>
-          <td>Password</td>
-          <td>{{ session('password') }}</td>
-      </tr>
-      <tr>
-          <td></td>
-          <td><a href="/buyer/edit/{{session('id')}}">Edit</a></td>
-      </tr>
-    </table>
-    <a href="/buyer/index">Go back.</a>
+            <td>User address</td>
+            <td><input type="text" name="address" value="{{$user->address}}"></td>
+        </tr>
+        <tr>
+            <td>User Mobile</td>
+            <td><input type="text" name="phone" value="{{$user->phone}}"></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><input type="text" name="password" value="{{$user->password}}"></td>
+        </tr>
+        <tr>
+            <td>Re type Password</td>
+            <td><input type="text" name="rpass" value=""></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" name="update" class="btn btn-primary" value="update"></td>
+        </tr>
+      </table>
+    </form>
+    <form method="post" enctype="multipart/form-data" action="/buyer/pic/{{session('id')}}">
+        @csrf 
+        <img src="/upload/{{$user->image}}" width="200px" height="150px">
+        <h5>change profile picture</h5>
+        <input type="file" name="image" class="btn btn-warning">
+        <input type="submit" name="update" class="btn btn-primary" value="change">
+    </form>
+      @foreach ($errors->all() as $error)
+        {{$error}} <br>
+      @endforeach
 </body>
 </html>

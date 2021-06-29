@@ -80,4 +80,13 @@ class OrderController extends Controller
        //  print_r($data['total_income'][0]->sum(price));
         return view('Admin.dashboard')->with('orderlist', $data);
     }
+    public function showBuyerOrder(Request $req){
+        $order =new Order();
+        $orders = $order->where('buyerid',session('id'))->orderBy('date', 'DESC')->paginate(3);
+        return view('Buyer.showBuyerOrder')->with('orderlist', $orders);
+
+
+        //$orders= DB::select("SELECT * FROM `orderlist` WHERE sellerid='".session('id')."' order by id desc")->pagination(5);
+        //return view('Seller.showOrder')->with('orderlist', $orders);
+    }
 }
