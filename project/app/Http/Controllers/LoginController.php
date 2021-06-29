@@ -28,6 +28,11 @@ class LoginController extends Controller
                 $req->session()->put('name', $user['name']);
                 $req->session()->put('type', $user['type']);
                 $req->session()->put('id', $user['id']);
+                $req->session()->put('email', $user['email']);
+                $req->session()->put('address', $user['address']);
+                $req->session()->put('phone', $user['phone']);
+                $req->session()->put('password', $user['password']);
+                $req->session()->put('image', $user['image']);
 
                 //$req->session()->put('name', $result->name);
                 //$req->session()->put('type', $result->type);
@@ -53,7 +58,8 @@ class LoginController extends Controller
         return view('Admin.index');
     }
     public function buyer(){
-        return view('Buyer.index');
+        $product = DB::table('product')->get();
+        return view('Buyer.index',['product'=> $product]);
     }
     public function seller(){
         return view('Seller.index');

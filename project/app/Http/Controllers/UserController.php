@@ -57,7 +57,6 @@ class UserController extends Controller
             $user->save();
             if($file->move('upload', $file->getClientOriginalName())){
                 return redirect('/login');
-                echo "successfully created account, login with email and password.";
             }
             else{
                 echo "error";
@@ -74,6 +73,7 @@ class UserController extends Controller
         $user = User::find($id);
         return view('Seller.profile')->with('user', $user);
     }
+    
     public function profileupdate(UserRequest $req, $id)
     {
         $user= User::find($id);

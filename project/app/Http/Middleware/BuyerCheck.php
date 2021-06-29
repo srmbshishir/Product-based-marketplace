@@ -19,7 +19,7 @@ class BuyerCheck
         if(session('type') == 'buyer'){
             return $next($request);
         }else{
-            $request->session()->flash('msg', 'Invalid request');
+           $request->session()->flash('msg', 'Invalid request');
             return redirect('/login');
         }
     }
