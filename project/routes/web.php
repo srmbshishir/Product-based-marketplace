@@ -20,7 +20,7 @@ use App\Models\Product;
 
 Route::get('/', function(){
     $product =new Product();
-    $products = $product->where('status','accepted')->paginate(6);
+    $products = $product->where('status','accepted')->paginate(8);
     return view('welcome',['product'=> $products]);
 });
 // Route::post('/', function(Request $req){

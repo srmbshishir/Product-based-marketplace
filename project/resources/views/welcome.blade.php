@@ -21,7 +21,19 @@
         @csrf
         <input type="submit" class="btn btn-primary" name="khujo" value="Show All">
     </form>
-    
+    @foreach ($product as $key => $data)
+    <div class="card" style="width: 18rem; float: left;">
+        <img src="/upload/{{$data->image}}" class="card-img-top" style="width: 150px; height:120px;" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{$data->name}}</h5>
+          <p class="card-text">Price :{{$data->price}}</p>
+          <p class="card-text">Quantity :{{$data->quantity}}</p>
+          <p class="card-text">{{$data->description}}</p>
+          <a href="/register" class="btn btn-danger">Buy</a><br><a href="/register" class="btn btn-warning">Add to Cart</a>
+        </div>
+      </div>
+      @endforeach
+      {{--
     <table class="table table-dark table-hover">
 		<tr>
             <td>Product Id</td>
@@ -50,12 +62,16 @@
             </tr>
         @endforeach
  	</table>
+     --}}
      <style>
         .w-5{
             display: none;
         }
     </style>
-    {{ $product->appends(Request::except('page'))->links() }}
+    <div style="float: left" >
+        {{ $product->appends(Request::except('page'))->links() }}
+    </div>
+    
     
 </body>
 </html>
