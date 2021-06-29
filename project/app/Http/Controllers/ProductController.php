@@ -181,7 +181,7 @@ class ProductController extends Controller
     public function welcomeshow(Request $req){
 
         $product =new Product();
-        $products = $product->where('status','accepted')->paginate(6);
+        $products = $product->where('status','accepted')->paginate(8);
 
         return view('welcome',['product'=> $products]);
       
