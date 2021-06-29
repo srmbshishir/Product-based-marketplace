@@ -50,6 +50,7 @@
 					<td><input type="submit" name="Register" value="submit"/></td>
 				</tr>
 			</table>
+			<a href="/" class="btn btn-danger">Back</a>
 		</fieldset>
 	</div>
 	{{session('msg')}}
