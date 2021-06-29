@@ -11,8 +11,18 @@
 <body>
     <h1>APWT Marketplace</h1>
     <a href="/login" class="btn btn-success">Login</a><a href="/register" class="btn btn-warning">Register</a> 
+
+    <form method="get" enctype="multipart/form-data" action="/welcome/search">
+        @csrf
+        <input type="text" placeholder="Type product id/type" name="search">
+        <input type="submit" class="btn btn-dark" name="khujo" value="Search">
+    </form>
+    <form method="get" enctype="multipart/form-data" action="/welcome/all">
+        @csrf
+        <input type="submit" class="btn btn-primary" name="khujo" value="Show All">
+    </form>
     
-    <table class="table table-striped">
+    <table class="table table-dark table-hover">
 		<tr>
             <td>Product Id</td>
             <td>Product Name</td>
@@ -36,10 +46,16 @@
                 <td>{{$data->quantity}}</td>
                 <td>{{$data->description}}</td>
                 <td><img src="/upload/{{$data->image}}" alt="" width="200px" height="150px"></td>
-                <td><a href="/register">Buy</a><br><a href="/register">Add to Cart</a></td>
+                <td><a href="/register" class="btn btn-danger">Buy</a><br><a href="/register" class="btn btn-warning">Add to Cart</a></td>
             </tr>
         @endforeach
  	</table>
+     <style>
+        .w-5{
+            display: none;
+        }
+    </style>
+    {{ $product->appends(Request::except('page'))->links() }}
     
 </body>
 </html>

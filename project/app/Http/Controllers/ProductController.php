@@ -170,4 +170,20 @@ class ProductController extends Controller
         //dd($req->all());
         return view('Admin.approve')->with('userlist', $products);
     }
+    public function welcomesearch(Request $req)
+    {
+        $product =new Product();
+        $products = $product->where('id','like','%'.$req->search.'%')->where('status','accepted')->orwhere('category','like','%'.$req->search.'%')->where('status','accepted')->paginate(6);
+        //SELECT * FROM `product` WHERE id like 'elec%' or category like 'elec%'
+        //dd($req->all());
+        return view('welcome',['product'=> $products]);
+    }
+    public function welcomeshow(Request $req){
+
+        $product =new Product();
+        $products = $product->where('status','accepted')->paginate(6);
+
+        return view('welcome',['product'=> $products]);
+      
+    }
 }

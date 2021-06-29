@@ -5,6 +5,7 @@ use App\Http\Controllers;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Models;
+use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +19,19 @@ use App\Models;
 */
 
 Route::get('/', function(){
-    $product = DB::table('product')->get();
-    return view('welcome',['product'=> $product]);
+    $product =new Product();
+    $products = $product->where('status','accepted')->paginate(6);
+    return view('welcome',['product'=> $products]);
 });
+// Route::post('/', function(Request $req){
+//     $product =new Product();
+//     $products = $product->where('id','like','%'.$req->search.'%')->orwhere('category','like','%'.$req->search.'%')->paginate(6);
+
+//     return view('welcome',['product'=> $products]);
+// });
+
+ Route::get('/welcome/search', 'ProductController@welcomesearch');
+ Route::get('/welcome/all', 'ProductController@welcomeshow');
 
 Route::get('/login', 'LoginController@index');
 Route::post('/login', 'LoginController@verify');

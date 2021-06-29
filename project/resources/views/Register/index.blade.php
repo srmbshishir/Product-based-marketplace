@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h1 align="center">Register Form</h1>
-	<a href='/login' class="btn btn-danger"> Back </a>
+	<a href='/login' class="btn btn-danger"> Login </a>
 
 	<form action="" method="post" enctype="multipart/form-data">
 		@csrf
@@ -51,7 +51,7 @@
 					<td><input type="submit" name="Register" value="submit"/></td>
 				</tr>
 			</table>
-			<a href="/" class="btn btn-danger">Back</a>
+			<a href="/" class="btn btn-danger">Home</a>
 		</fieldset>
 	</div>
 	{{session('msg')}}
