@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LoginController;
+use App\Models;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +18,8 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function(){
-    return view('welcome');
+    $product = DB::table('product')->get();
+    return view('welcome',['product'=> $product]);
 });
 
 Route::get('/login', 'LoginController@index');
@@ -28,10 +31,9 @@ Route::post('/register', [UserController::class,'insert']);
 Route::group(['middleware'=>['sess']], function(){
 
     Route::get('/admin/index', 'LoginController@admin');
-    Route::get('/buyer/index', 'LoginController@buyer');
-    Route::get('/seller/index', 'LoginController@seller');
 
     Route::group(['middleware'=>['seller']], function(){
+        Route::get('/seller/index', 'LoginController@seller');
         Route::get('/seller/addProduct', 'ProductController@add')->name('add');
         Route::post('/seller/addProduct', 'ProductController@insert')->name('insert');
         Route::get('/seller/showProduct', 'ProductController@show')->name('show');
@@ -57,7 +59,14 @@ Route::group(['middleware'=>['sess']], function(){
         
         Route::get('/seller/showOrderList', 'OrderController@showOrder')->name('showOrder');
     });
-    Route::group(['middleware'=>['buyer']], function(){});
+    Route::group(['middleware'=>['buyer']], function(){
+        Route::get('/buyer/index',[LoginController::class,'buyer']);
+        Route::get('/buyer/profile/{id}', 'BuyerController@buyerProfile')->name('buyerProfile');
+        Route::get('/buyer/edit/{id}','BuyerController@edit')->name('edit');
+        Route::post('/buyer/edit/{id}','BuyerController@editProfile');
+        Route::get('buyer/edit/buyer/cpass/{id}','BuyerController@cpass');
+
+    });
 });
 
 Route::get('/logout', 'LogoutController@index')->name('logout');

@@ -19,7 +19,7 @@ class SellerCheck
         if($request->session()->has('type') == 'seller'){
             return $next($request);
         }else{
-            return redirect()->route('/seller/index');
+            return redirect()->route('login');
         }
     }
 }

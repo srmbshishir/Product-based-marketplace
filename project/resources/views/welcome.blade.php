@@ -1,4 +1,4 @@
-{{-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,25 +20,20 @@
             <td>image</td>
             <td>Action</td>
 		</tr>
-        @foreach ($userlist as $product)
+        @foreach ($product as $key => $data)
             <tr>
-                <td>{{$product->id}}</td>
-                <td>{{$product->name}}</td>
-                <td>{{$product->price}}</td>
-                <td>{{$product->p_condition}}</td>
-                <td>{{$product->category}}</td>
-                <td>{{$product->discount}}</td>
-                <td>{{$product->quantity}}</td>
-                <td>{{$product->description}}</td>
-                <td><img src="/upload/{{$product->image}}" alt="" width="200px" height="150px"></td>
-
-                <td>
-                    <a href="/product/{{$product->id}}/edit/"> Edit</a>
-                    <a href="/product/{{$product->id}}/delete/" onclick="return confirm('Are you sure?')">Delete</a>
-                </td>
+                <td>{{$data->id}}</td>
+                <td>{{$data->name}}</td>
+                <td>{{$data->price}}</td>
+                <td>{{$data->p_condition}}</td>
+                <td>{{$data->category}}</td>
+                <td>{{$data->discount}}</td>
+                <td>{{$data->quantity}}</td>
+                <td>{{$data->description}}</td>
+                <td><img src="/upload/{{$data->image}}" alt="" width="200px" height="150px"></td>
             </tr>
         @endforeach
  	</table>
     
 </body>
-</html> --}}
+</html>

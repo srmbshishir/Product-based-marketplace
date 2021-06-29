@@ -19,7 +19,7 @@ class BuyerCheck
         if($request->session()->has('type') == 'buyer'){
             return $next($request);
         }else{
-            return redirect()->route('/Buyer/index');
+            return redirect()->route('login');
         }
     }
 }

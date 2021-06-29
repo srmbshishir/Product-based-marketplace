@@ -99,6 +99,7 @@ class ProductController extends Controller
         $product = Product::find($name);
         return view('Seller.edit')->with('product', $product);
     }
+    
 
     public function update(ProductRequest $req, $name)
     {
