@@ -45,6 +45,8 @@
         </tr>
       </table>
     </form>
+
+
     <form method="post" enctype="multipart/form-data" action="/seller/pic/{{session('id')}}">
         @csrf 
         <img src="/upload/{{$user->image}}" width="200px" height="150px">

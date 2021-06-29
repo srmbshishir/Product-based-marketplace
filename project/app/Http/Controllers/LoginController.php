@@ -22,7 +22,7 @@ class LoginController extends Controller
 
         //echo $result;
        // print_r($result[0]);
-        if(DB::table('user')->where('email',$req->email)->where('password', $req->password)->exists()){
+        if(DB::table('user')->where('email',$req->email)->where('password', $req->password)->where('status','!=','blocked')->exists()){
         //if(count(array($result)) > 0){
                 $user = Person::find($req->email);
                 $req->session()->put('name', $user['name']);
@@ -46,6 +46,10 @@ class LoginController extends Controller
                 if($user['type']=='seller'){
                     return redirect('/seller/index');
                 }   
+        }
+        else if(DB::table('user')->where('email',$req->email)->where('password', $req->password)->where('status','blocked')->exists()){
+            $req->session()->flash('msg', 'Account Blocked!');
+            return redirect('/login');
         }
         else{
             $req->session()->flash('msg', 'Invalid username or password!');
