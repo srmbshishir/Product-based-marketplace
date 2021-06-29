@@ -67,6 +67,7 @@ Route::group(['middleware'=>['sess']], function(){
         Route::get('/product/{name}/delete', 'ProductController@delete');
         
         Route::get('/seller/showOrderList', 'OrderController@showOrder')->name('showOrder');
+        
     });
     Route::group(['middleware'=>['buyer']], function(){
         Route::get('/buyer/index',[LoginController::class,'buyer']);
@@ -93,6 +94,7 @@ Route::group(['middleware'=>['sess']], function(){
         Route::get('/admin/{id}/edit', 'UserController@edit');
         Route::post('/admin/{id}/edit', 'UserController@update');
         Route::get('/admin/{id}/delete', 'UserController@delete');
+        Route::post('/admin/userstatus/{id}', 'UserController@status');
 
         Route::get('/admin/profile/{id}', 'UserController@profileadmin')->name('profile');
         Route::post('/admin/profile/{id}', 'UserController@adminupdate');

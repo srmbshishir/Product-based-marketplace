@@ -51,6 +51,7 @@ class UserController extends Controller
         $user->address = $req->address;
         $user->phone = $req->phone;
         $user->password = $req->password;
+        $user->status='active';
         if($req->hasFile('image')){
             $file = $req->file('image');
             $user->image = $file->getClientOriginalName();
@@ -186,6 +187,7 @@ class UserController extends Controller
         $user->address = $req->address;
         $user->phone = $req->phone;
         $user->password = $req->password;
+        $user->status='active';
         if($req->hasFile('image')){
             $file = $req->file('image');
             $user->image = $file->getClientOriginalName();
@@ -242,7 +244,21 @@ class UserController extends Controller
         }
         return view('Admin.profile')->with('user',$user);
     }
-     //ADMIN PROFILE WORK
+
+    public function status(Request $req, $id)
+    {
+        $user= User::find($id);
+        //print_r($order);
+        $user->status = $req->status;
+        //print_r($order->track);
+
+        $user->save();
+        //dd($req->all());
+        return redirect('/admin/showUser');
+    }
+
+
+     //Buyer PROFILE WORK
      public function buyerProfile($id){
         // return view('Seller.profile');
          $user = User::find($id);
