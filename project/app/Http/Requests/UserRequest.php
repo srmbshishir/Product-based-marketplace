@@ -44,7 +44,7 @@ class UserRequest extends FormRequest
             'image.required'=> 'please upload a picture',
             'password.required'=> 'minimum 10 characters for password.',
             'rpass.required'=>'confirm password',
-            'rpass.same'=>'password must match.'
+            'rpass.same'=>'password must match.',
          ];
     }
 }

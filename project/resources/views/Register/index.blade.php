@@ -10,6 +10,7 @@
 <body>
 	<h1 align="center">Register Form</h1>
 	<a href='/login' class="btn btn-danger"> Back </a>
+
 	<form action="" method="post" enctype="multipart/form-data">
 		@csrf
 	<div align="center">

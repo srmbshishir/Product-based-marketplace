@@ -11,7 +11,7 @@ class HomeController extends Controller
 {
     public function show(Request $req){
         $product =new Product();
-        $products = $product->where('userid',session('id'))->paginate(3);
-        return view('Seller.show')->with('userlist', $products);
+        $products = $product->paginate(3);
+        return view('welcome')->with($products);
     }
 }
