@@ -25,6 +25,7 @@ Route::get('/', function(){
 Route::get('/login', 'LoginController@index');
 Route::post('/login', 'LoginController@verify');
 
+
 Route::get('/register', [UserController::class,'index']);
 Route::post('/register', [UserController::class,'insert']);
 

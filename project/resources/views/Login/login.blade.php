@@ -30,6 +30,11 @@
                 <td><a href="/register">Register Here.</a></td>
                 <td></td>
             </tr>
+            <tr>
+                <td>
+                <a href="/" class="btn btn-danger">Back</a>
+                </td>
+            </tr>
         </table>
         {{session('msg')}}
         @foreach ($errors->all() as $error)
