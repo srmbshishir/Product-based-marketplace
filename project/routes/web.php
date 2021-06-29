@@ -58,10 +58,9 @@ Route::group(['middleware'=>['sess']], function(){
     });
     Route::group(['middleware'=>['buyer']], function(){
         Route::get('/buyer/index',[LoginController::class,'buyer']);
-        Route::get('/buyer/profile/{id}', 'BuyerController@buyerProfile')->name('buyerProfile');
-        Route::get('/buyer/edit/{id}','BuyerController@edit')->name('edit');
-        Route::post('/buyer/edit/{id}','BuyerController@editProfile');
-        Route::get('buyer/edit/buyer/cpass/{id}','BuyerController@cpass');
+        Route::get('/buyer/profile/{id}', 'UserController@buyerProfile')->name('buyerProfile');
+        Route::post('/buyer/profile/{id}','UserController@buyerUpdate');
+        Route::post('/buyer/pic/{id}','UserController@buyerimage');
 
     });
 
