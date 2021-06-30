@@ -51,7 +51,7 @@ class OrderController extends Controller
         //SELECT sum(price) FROM `orderlist` WHERE track='delivered' and sellerid='S-104' and MONTH(date) = MONTH(CURRENT_DATE())
         $month_income= DB::select("SELECT sum(price) FROM `orderlist` WHERE track='delivered' and sellerid='".session('id')."' and MONTH(date) = MONTH(CURRENT_DATE())");
         //SELECT count(*) FROM `orderlist` WHERE track!='delivered'
-        $pending=DB::select("SELECT count(*) FROM `orderlist` WHERE track!='delivered'");
+        $pending=DB::select("SELECT count(*) FROM `orderlist` WHERE track!='delivered' and sellerid='".session('id')."'");
 
 
        // prinpt_r($orders[0][0]);
