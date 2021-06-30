@@ -14,7 +14,7 @@
 
     <form method="get" enctype="multipart/form-data" action="/welcome/search">
         @csrf
-        <input type="text" placeholder="Type product id/type" name="search">
+        <input type="text" placeholder="Type product name/type" name="search">
         <input type="submit" class="btn btn-dark" name="khujo" value="Search">
     </form>
     <form method="get" enctype="multipart/form-data" action="/welcome/all">

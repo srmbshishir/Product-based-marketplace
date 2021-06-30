@@ -31,7 +31,6 @@
 				<tr>
 					<td>User Type: 
 					<select name="type">
-						<option value="admin">Admin</option>
 						<option value="seller">Seller</option>
 						<option value="buyer">Buyer</option>
 					</select>
@@ -58,6 +57,13 @@
 	@foreach ($errors->all() as $error)
 	{{$error}} <br>
 	@endforeach
+	
+	@if ($errors =="")
+		<div class="alert alert-success alert-block">
+			<button type="button" class="close" data-dismiss="alert">×</button>    
+			<strong>{{ "success" }}</strong>
+		</div>
+	@endif
 	</form>
 	
 </body>

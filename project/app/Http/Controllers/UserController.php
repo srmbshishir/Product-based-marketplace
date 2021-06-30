@@ -57,7 +57,20 @@ class UserController extends Controller
             $user->image = $file->getClientOriginalName();
             $user->save();
             if($file->move('upload', $file->getClientOriginalName())){
-                return redirect('/login');
+                $req->session()->put('name', $user->name);
+                $req->session()->put('type', $user->type);
+                $req->session()->put('id', $user->id);
+                $req->session()->put('email', $user->email);
+                $req->session()->put('address', $user->address);
+                $req->session()->put('phone', $user->phone);
+                $req->session()->put('image', $user->image);
+
+                if(session('type')=='seller'){
+                    return redirect('/seller/index');
+                }
+                else if(session('type')=='buyer'){
+                    return redirect('/buyer/'.session('id').'/index');
+                }
             }
             else{
                 echo "error";
