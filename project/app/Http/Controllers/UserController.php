@@ -88,7 +88,7 @@ class UserController extends Controller
         return view('Seller.profile')->with('user', $user);
     }
     
-    public function profileupdate(UserRequest $req, $id)
+    public function profileupdate(ProRequest $req, $id)
     {
         $user= User::find($id);
         $user->name = $req->name;

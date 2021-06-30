@@ -8,7 +8,7 @@
     <title>Dashboard</title>
 </head>
 <body>
-    <a href='/buyer/{{ session('id') }}/index'> Back </a>
+    <a href='/admin/index'> Back </a>
     <h1>Dashbaord</h1>
     {{--$orderlist[0][0]--}}
     {{--$orderlist['current_month_income']--}}
