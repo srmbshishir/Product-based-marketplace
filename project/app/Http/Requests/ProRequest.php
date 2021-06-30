@@ -29,9 +29,9 @@ class ProRequest extends FormRequest
             'address'=>'required|max:255',
             'phone'=>'required',
            // 'type'=>'required',
-           // 'image'=>'required',
+            //'image'=>'required',
             'password'=>'required|alpha_num|min:8|max:20|bail',
-            'rpass'=>'required|same:password',
+            //'rpass'=>'required|same:password',
         ];
     }
     public function messages(){
@@ -43,8 +43,8 @@ class ProRequest extends FormRequest
             //'type.required'=> 'enter a user type.',
             //'image.required'=> 'please upload a picture',
             'password.required'=> 'minimum 8 characters for password.',
-            'rpass.required'=>'confirm password',
-            'rpass.same'=>'password must match.'
+            //'rpass.required'=>'confirm password',
+            //'rpass.same'=>'password must match.'
          ];
     }
 }

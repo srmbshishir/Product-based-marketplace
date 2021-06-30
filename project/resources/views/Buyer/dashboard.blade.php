@@ -14,28 +14,23 @@
     {{--$orderlist['current_month_income']--}}
     <div class="card" style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title">Total transaction money</h5>
+          <h5 class="card-title">Total money cost</h5>
             <p class="card-text">
-                @foreach($orderlist['total_income'][0] as $link)
+                @foreach($orderlist['total_cost'][0] as $link)
                     <h1>Tk. {{ $link }}</h1>
                 @endforeach
             </p>
         </div>
     </div>
-
-    <h1>Top seller table</h1>
-    <table class="table table-dark table-striped">
-        <tr>
-            <td>Sellerid</td>
-            <td>Amount</td>
-        </tr>
-        @foreach($orderlist['seller'] as $link)
-        <tr>
-            <td>{{ $link->sellerid}}</td>
-            <td>{{ $link->sum}}</td>
-        </tr>
-        @endforeach
-    </table>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Income this month</h5>
+            <p class="card-text">
+                @foreach($orderlist['current_month_income'][0] as $mon)
+                    <h1>Tk. {{ $mon }}</h1>
+                @endforeach </p>
+        </div>
+    </div>
     
 </body>
 </html>

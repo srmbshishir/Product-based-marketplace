@@ -9,33 +9,48 @@
     <title>Profile</title>
 </head>
 <body>
-    <h1>personal profile of {{ session('id') }}</h1>
-    <table>
+    <h1>Edit Profile</h1>
+    <form align="center" method="post">
+   @csrf
+   <a href="/buyer/{{ session('id') }}/index" class="btn btn-warning">Go back.</a>
+        <table>
         <tr>
             <td>Name</td>
-            <td>{{ session('name') }}</td>
+            <td><input type="text" name="name" value="{{$user->name}}"></td>
         </tr>
         <tr>
           <td>Email</td>
-          <td>{{ session('email') }}</td>
+          <td><input type="email" name="email" value="{{$user->email}}"></td>
       </tr>
       <tr>
           <td>Address</td>
-          <td>{{ session('address') }}</td>
+          <td><input type="text" name="address" value="{{$user->address}}"></td>
       </tr>
       <tr>
           <td>Mobile</td>
-          <td>{{ session('phone') }}</td>
+          <td><input type="phone" name="phone" value="{{$user->phone}}"></td>
       </tr>
       <tr>
-          <td>Password</td>
-          <td>{{ session('password') }}</td>
-      </tr>
+        <td>Password</td>
+        <td><input type="password" name="password" value="{{$user->password}}"></td>
+    </tr>
       <tr>
           <td></td>
-          <td><a href="/buyer/edit/{{session('id')}}">Edit</a></td>
+          <td><input type="submit" name="edit"></td>
+          <td></td>
       </tr>
+    </form>
+    @foreach ($errors->all() as $error)
+  {{$error}} <br>
+  @endforeach
+
     </table>
-    <a href="/buyer/index">Go back.</a>
+    <form method="post" enctype="multipart/form-data" action="/buyer/pic/{{session('id')}}">
+        @csrf 
+        <img src="/upload/{{$user->image}}" width="200px" height="150px">
+        <h5>change profile picture</h5>
+        <input type="file" name="image" class="btn btn-warning">
+        <input type="submit" name="update" class="btn btn-primary" value="change">
+    </form>
 </body>
 </html>

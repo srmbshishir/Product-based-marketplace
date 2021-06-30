@@ -40,6 +40,11 @@ class OrderController extends Controller
         //dd($req->all());
         return redirect()->route('showOrder');
     }
+    public function trackOrder(Request $req, $id){
+        $order = new Order;
+        $orders = $order->where('buyerid',session('id'));
+        return view('Buyer.orderTrack')->with('orderlist',$orders);
+    }
     public function dashboard(Request $req, $id){
         //SELECT sum(price) FROM `orderlist` WHERE track='delivered' and sellerid='S-104'
         $orders= DB::select("SELECT sum(price) FROM `orderlist` WHERE track='delivered' and sellerid='".session('id')."'");
@@ -49,7 +54,7 @@ class OrderController extends Controller
         $pending=DB::select("SELECT count(*) FROM `orderlist` WHERE track!='delivered'");
 
 
-       // print_r($orders[0][0]);
+       // prinpt_r($orders[0][0]);
          $data = [
              'total_income'             => $orders,
              'current_month_income'     => $month_income,
@@ -60,7 +65,7 @@ class OrderController extends Controller
         return view('Seller.dashboard')->with('orderlist', $data);
     }
     public function export(){
-        return Excel::download(new SaleExport,'innovices.xlsx');
+        return Excel::download(new SaleExport,'invoices.xlsx');
     }
     public function admindashboard(Request $req){
         //SELECT sum(price) FROM `orderlist` where track='delivered''
@@ -79,5 +84,24 @@ class OrderController extends Controller
        //  dd($req->all());
        //  print_r($data['total_income'][0]->sum(price));
         return view('Admin.dashboard')->with('orderlist', $data);
+    }
+    public function buyerdashboard(Request $req, $id){
+        //SELECT sum(price) FROM `orderlist` WHERE track='delivered' and sellerid='S-104'
+        $orders= DB::select("SELECT sum(price) FROM `orderlist` WHERE track='delivered' and buyerid='".session('id')."'");
+        //SELECT sum(price) FROM `orderlist` WHERE track='delivered' and sellerid='S-104' and MONTH(date) = MONTH(CURRENT_DATE())
+        $month_income= DB::select("SELECT sum(price) FROM `orderlist` WHERE track='delivered' and buyerid='".session('id')."' and MONTH(date) = MONTH(CURRENT_DATE())");
+        //SELECT count(*) FROM `orderlist` WHERE track!='delivered'
+        //$pending=DB::select("SELECT count(*) FROM `orderlist` WHERE track!='delivered'");
+
+
+       // prinpt_r($orders[0][0]);
+         $data = [
+             'total_cost'             => $orders,
+             'current_month_income'     => $month_income,
+            // 'pending'                  => $pending
+        ];
+       //  dd($req->all());
+       //  print_r($data['total_income'][0]->sum(price));
+        return view('Buyer.dashboard')->with('orderlist', $data);
     }
 }

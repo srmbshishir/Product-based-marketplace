@@ -36,7 +36,7 @@
                 <td>{{$data->quantity}}</td>
                 <td>{{$data->description}}</td>
                 <td><img src="/upload/{{$data->image}}" alt="" width="200px" height="150px"></td>
-                <td><a href="/registration">Buy</a><br><a href="/registration">Add to Cart</a></td>
+                <td><a href="/register">Buy</a><br><a href="/register">Add to Cart</a></td>
             </tr>
         @endforeach
  	</table>
