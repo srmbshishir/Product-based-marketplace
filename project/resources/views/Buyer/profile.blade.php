@@ -40,11 +40,8 @@
           <td></td>
       </tr>
     </form>
-    @foreach ($errors->all() as $error)
-  {{$error}} <br>
-  @endforeach
-
     </table>
+
     <form method="post" enctype="multipart/form-data" action="/buyer/pic/{{session('id')}}">
         @csrf 
         <img src="/upload/{{$user->image}}" width="200px" height="150px">
@@ -52,5 +49,8 @@
         <input type="file" name="image" class="btn btn-warning">
         <input type="submit" name="update" class="btn btn-primary" value="change">
     </form>
+      @foreach ($errors->all() as $error)
+        {{$error}} <br>
+      @endforeach
 </body>
 </html>

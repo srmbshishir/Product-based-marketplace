@@ -97,11 +97,20 @@ class OrderController extends Controller
        // prinpt_r($orders[0][0]);
          $data = [
              'total_cost'             => $orders,
-             'current_month_income'     => $month_income,
+             'current_month_income'     => $month_income
             // 'pending'                  => $pending
         ];
        //  dd($req->all());
        //  print_r($data['total_income'][0]->sum(price));
         return view('Buyer.dashboard')->with('orderlist', $data);
+    }    
+    public function showBuyerOrder(Request $req){
+        $order =new Order();
+        $orders = $order->where('buyerid',session('id'))->orderBy('date', 'DESC')->paginate(3);
+        return view('Buyer.showBuyerOrder')->with('orderlist', $orders);
+
+
+        //$orders= DB::select("SELECT * FROM `orderlist` WHERE sellerid='".session('id')."' order by id desc")->pagination(5);
+        //return view('Seller.showOrder')->with('orderlist', $orders);
     }
 }

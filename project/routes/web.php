@@ -5,6 +5,7 @@ use App\Http\Controllers;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Models;
+use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +19,19 @@ use App\Models;
 */
 
 Route::get('/', function(){
-    $product = DB::table('product')->get();
-    return view('welcome',['product'=> $product]);
+    $product =new Product();
+    $products = $product->where('status','accepted')->paginate(8);
+    return view('welcome',['product'=> $products]);
 });
+// Route::post('/', function(Request $req){
+//     $product =new Product();
+//     $products = $product->where('id','like','%'.$req->search.'%')->orwhere('category','like','%'.$req->search.'%')->paginate(6);
+
+//     return view('welcome',['product'=> $products]);
+// });
+
+ Route::get('/welcome/search', 'ProductController@welcomesearch');
+ Route::get('/welcome/all', 'ProductController@welcomeshow');
 
 Route::get('/login', 'LoginController@index');
 Route::post('/login', 'LoginController@verify');
@@ -56,6 +67,7 @@ Route::group(['middleware'=>['sess']], function(){
         Route::get('/product/{name}/delete', 'ProductController@delete');
         
         Route::get('/seller/showOrderList', 'OrderController@showOrder')->name('showOrder');
+        
     });
     Route::group(['middleware'=>['buyer']], function(){
         //Route::get('/buyer/index',[LoginController::class,'buyer']);
@@ -71,7 +83,6 @@ Route::group(['middleware'=>['sess']], function(){
         Route::get('/buyer/show_cart/{userId}','CartController@show');
         Route::get('/buyer/dashboard/{id}','OrderController@buyerdashboard');
         Route::get('/buyer/{id}/track','OrderController@trackOrder');
-       
 
     });
 
@@ -92,6 +103,7 @@ Route::group(['middleware'=>['sess']], function(){
         Route::get('/admin/{id}/edit', 'UserController@edit');
         Route::post('/admin/{id}/edit', 'UserController@update');
         Route::get('/admin/{id}/delete', 'UserController@delete');
+        Route::post('/admin/userstatus/{id}', 'UserController@status');
 
         Route::get('/admin/profile/{id}', 'UserController@profileadmin')->name('profile');
         Route::post('/admin/profile/{id}', 'UserController@adminupdate');

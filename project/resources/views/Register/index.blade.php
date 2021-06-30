@@ -5,11 +5,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
 	<title>Registration Page</title>
 </head>
 <body>
-	<h1 align="center">Registration Form</h1>
+	<h1 align="center">Register Form</h1>
+	<a href='/login' class="btn btn-danger"> Login </a>
+
 	<form action="" method="post" enctype="multipart/form-data">
 		@csrf
 	<div align="center">
@@ -50,7 +51,7 @@
 					<td><input type="submit" name="Register" value="submit"/></td>
 				</tr>
 			</table>
-			<a href="/" class="btn btn-danger">Back</a>
+			<a href="/" class="btn btn-danger">Home</a>
 		</fieldset>
 	</div>
 	{{session('msg')}}

@@ -30,6 +30,8 @@
             <td>Address</td>
             <td>Phone</td>
             <td>Image</td>
+            <td>status</td>
+            <td>change status</td>
             <td>Action</td>
 		</tr>
         @foreach ($userlist as $user)
@@ -41,12 +43,24 @@
                 <td>{{$user->address}}</td>
                 <td>{{$user->phone}}</td>
                 <td><img src="/upload/{{$user->image}}" alt="" width="100px" height="80px"></td>
+                <td>{{$user->status}}</td>
+                <td>
+                    <form method="post" enctype="multipart/form-data" action="/admin/userstatus/{{$user->id}}">
+                        @csrf
+                        <select name="status" id="status">
+                            <option value="active" {{$user->status=="active" ? 'selected' : ''}}>Active</option>
+                            <option value="blocked" {{$user->status=="blocked" ? 'selected' : ''}}>Blocked</option>
+                        </select>
+                        <input type="submit" name="khujo" value="Update Status">
+                    </form>
+                </td>
 
                 <td>
                     <a href="/admin/{{$user->id}}/edit/"> Edit</a>
-                    <a href="/admin/{{$user->id}}/delete/" onclick="return confirm('Are you sure?')">Delete</a>
+                    
                 
                     {{--
+                        <a href="/admin/{{$user->id}}/delete/" onclick="return confirm('Are you sure?')">Delete</a>
                         <a href="/product/{{$product['name']}}/edit/"> Edit</a>
                     <a href="/product/{{$product['name']}}/delete/">Delete</a>
                         <form action="/product/{{$product['name']}}/" method="DELETE">
