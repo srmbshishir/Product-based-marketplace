@@ -70,10 +70,19 @@ Route::group(['middleware'=>['sess']], function(){
         
     });
     Route::group(['middleware'=>['buyer']], function(){
-        Route::get('/buyer/index',[LoginController::class,'buyer']);
-        Route::get('/buyer/profile/{id}', 'UserController@buyerProfile')->name('buyerProfile');
-        Route::post('/buyer/profile/{id}','UserController@buyerUpdate');
-        Route::post('/buyer/pic/{id}','UserController@buyerimage');
+        //Route::get('/buyer/index',[LoginController::class,'buyer']);
+        Route::get('/buyer/{buyerId}/index',[LoginController::class,'buyer']);
+        
+
+        Route::get('/buyer/{buyerId}/index',[LoginController::class,'buyer']);
+        Route::get('/buyer/profile/{id}', 'BuyerController@buyerProfile')->name('buyerProfile');
+        Route::get('/buyer/edit/{id}','BuyerController@edit')->name('edit');
+        Route::post('/buyer/pic/{id}', 'BuyerController@buyerimage');
+        Route::post('/buyer/edit/{id}','BuyerController@editProfile');
+        Route::post('buyer','CartController@store');
+        Route::get('/buyer/show_cart/{userId}','CartController@show');
+        Route::get('/buyer/dashboard/{id}','OrderController@buyerdashboard');
+        Route::get('/buyer/{id}/track','OrderController@trackOrder');
 
     });
 

@@ -41,7 +41,7 @@ class LoginController extends Controller
                     return redirect('/admin/index');
                 }
                 if($user['type']=='buyer'){
-                    return redirect('/buyer/index');
+                    return redirect('/buyer/'.$user['id'].'/index');
                 }
                 if($user['type']=='seller'){
                     return redirect('/seller/index');
@@ -61,9 +61,9 @@ class LoginController extends Controller
     public function admin(){
         return view('Admin.index');
     }
-    public function buyer(){
+    public function buyer($userId){
         $product = DB::table('product')->get();
-        return view('Buyer.index',['product'=> $product]);
+        return view('Buyer.index',['product'=> $product, 'userId'=>$userId]);
     }
     public function seller(){
         return view('Seller.index');
