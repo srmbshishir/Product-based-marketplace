@@ -74,9 +74,10 @@ class ProductController extends Controller
         //return view('Seller.show')->with('userlist', $products);
 
         $product =new Product();
-        $products = $product->where('userid',session('id'))->paginate(3);
+        $products = $product->get();
         //return view('product.existing')->with('list',$list);
-        return view('Seller.show')->with('userlist', $products);
+        return $products;
+        // return view('Seller.show')->with('userlist', $products);
       
         //$products= DB::select("SELECT * FROM `product` WHERE userid='".session('id')."'");
         

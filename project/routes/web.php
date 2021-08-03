@@ -40,8 +40,6 @@ Route::post('/login', 'LoginController@verify');
 Route::get('/register', [UserController::class,'index']);
 Route::post('/register', [UserController::class,'insert']);
 
-Route::group(['middleware'=>['sess']], function(){
-    Route::group(['middleware'=>['seller']], function(){
         Route::get('/seller/index', 'LoginController@seller');
         Route::get('/seller/addProduct', 'ProductController@add')->name('add');
         Route::post('/seller/addProduct', 'ProductController@insert')->name('insert');
@@ -68,8 +66,7 @@ Route::group(['middleware'=>['sess']], function(){
         
         Route::get('/seller/showOrderList', 'OrderController@showOrder')->name('showOrder');
         
-    });
-    Route::group(['middleware'=>['buyer']], function(){
+
         //Route::get('/buyer/index',[LoginController::class,'buyer']);
         Route::get('/buyer/{buyerId}/index',[LoginController::class,'buyer']);
         
@@ -84,9 +81,7 @@ Route::group(['middleware'=>['sess']], function(){
         Route::get('/buyer/dashboard/{id}','OrderController@buyerdashboard');
         Route::get('/buyer/{id}/track','OrderController@trackOrder');
 
-    });
 
-    Route::group(['middleware'=>['admin']], function(){
         Route::get('/admin/index', 'LoginController@admin');
 
         Route::get('/admin/ApproveProduct', 'ProductController@approve')->name('approve');
@@ -109,7 +104,6 @@ Route::group(['middleware'=>['sess']], function(){
         Route::post('/admin/profile/{id}', 'UserController@adminupdate');
         Route::post('/admin/pic/{id}', 'UserController@adminimage');
         Route::get('/admin/dashboard/', 'OrderController@admindashboard');
-    });
-});
+
 
 Route::get('/logout', 'LogoutController@index')->name('logout');

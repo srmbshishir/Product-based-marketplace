@@ -127,8 +127,8 @@ class UserController extends Controller
     }
     public function showuser(){
         $user =new User();
-        $users = $user->orderBy('id','asc')->paginate(5);
-        return view('Admin.userlist')->with('userlist', $users);
+        $users = $user->get();
+        return $users;
     }
     public function usersearch(Request $req)
     {
